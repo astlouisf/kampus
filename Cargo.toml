@@ -1,0 +1,11 @@
+[package]
+name = "krampus"
+version = "0.1.0"
+authors = ["Alexandre St-Louis Fortier <astlouisf@gmail.com>"]
+
+[dependencies]
+csv = "1.0.0-beta.5"
+docopt = "0.8"
+rand = "0.3"
+serde = "1.0" # if you're using `derive(Deserialize)`
+serde_derive = "1.0" # if you're using `derive(Deserialize)`
