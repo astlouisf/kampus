@@ -24,7 +24,7 @@ In the spirit of Krampus, participants are encouraged to follows those simple ru
   2) Make a gift fitting the themes they received
 
 Usage:
-  krampus <participants-csv> <theme-file> 
+  krampus [--test] <participants-csv> <theme-file>
   krampus (-h | --help)
   krampus --version
 
@@ -37,7 +37,8 @@ Options:
 #[derive(Debug, Deserialize)]
 struct Args {
     arg_participants_csv: String,
-    arg_theme_file: String
+    arg_theme_file: String,
+    flag_test: bool
 }
 
 #[derive(Debug, Deserialize)]
@@ -78,11 +79,15 @@ fn main() {
         .collect()
         ;
 
-    for m in matches {
-        println!("{} -> {}", (m.0).0.name, (m.0).1.name);
-        for t in m.1 {
-            println!("  {}",t);
+    if args.flag_test {
+        for m in matches {
+            println!("{} -> {}", (m.0).0.name, (m.0).1.name);
+            for t in m.1 {
+                println!("  {}",t);
+            }
         }
+    } else {
+        println!("To do");
     }
 
 }
