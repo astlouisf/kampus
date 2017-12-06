@@ -26,6 +26,7 @@ mod tests {
 
     use super::*;
 
+
     #[test]
     // Ensures that no fixed point are present in the generated vector.
     fn no_fixed_point() {
@@ -34,15 +35,24 @@ mod tests {
 
         for _ in 0..10000 {
 
-            let derangement = random_derangement(rng.gen_range(5,10));
+            let size = rng.gen_range(5,10);
+            let derangement = random_derangement(size);
 
             // Test that all elements are different than their index.
             let not_found = derangement
-                .into_iter()
+                .iter()
                 .enumerate()
-                .all(|(i,p)| i != p);
+                .all(|(i, &p)| i != p);
 
             assert!(not_found);
+
+            // Ensures that each index is present in the permutation
+            let same_sum = derangement
+                .iter()
+                .enumerate()
+                .fold((0,0), |(ai, ap), (i, &p)| (ai+i, ap+p));
+
+            assert!(same_sum.0 == same_sum.1);
 
         }
     }
